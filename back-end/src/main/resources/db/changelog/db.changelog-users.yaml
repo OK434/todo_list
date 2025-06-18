@@ -1,0 +1,162 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1750272132829-1
+      author: ahmed-bader
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_users
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addUniqueConstraint:
+            tableName: users
+            columnNames: email
+            constraintName: uq_users_email
+      rollback:
+        - dropTable:
+            tableName: users
+
+  - changeSet:
+      id: 1750272132829-2
+      author: ahmed-bader
+      changes:
+        - createTable:
+            tableName: projects
+            columns:
+              - column:
+                  name: project_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_projects
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: date
+                  type: TIMESTAMP
+              - column:
+                  name: fk_user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: projects
+
+  - changeSet:
+      id: 1750272132829-3
+      author: ahmed-bader
+      changes:
+        - createTable:
+            tableName: tasks
+            columns:
+              - column:
+                  name: task_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_tasks
+                    nullable: false
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: fk_project_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: tasks
+
+  - changeSet:
+      id: 1750272132829-4
+      author: ahmed-bader
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: projects
+            baseColumnNames: fk_user_id
+            referencedTableName: users
+            referencedColumnNames: user_id
+            constraintName: fk_projects_on_user
+            onDelete: CASCADE
+            onUpdate: CASCADE
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: projects
+            constraintName: fk_projects_on_user
+
+  - changeSet:
+      id: 1750272132829-5
+      author: ahmed-bader
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: tasks
+            baseColumnNames: fk_project_id
+            referencedTableName: projects
+            referencedColumnNames: project_id
+            constraintName: fk_tasks_on_project
+            onDelete: CASCADE
+            onUpdate: CASCADE
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: tasks
+            constraintName: fk_tasks_on_project
+
+  - changeSet:
+      id: 1750272132829-6
+      author: ahmed-bader
+      changes:
+        - createIndex:
+            tableName: projects
+            indexName: idx_projects_user_id
+            columns:
+              - column:
+                  name: fk_user_id
+        - createIndex:
+            tableName: tasks
+            indexName: idx_tasks_project_id
+            columns:
+              - column:
+                  name: fk_project_id
+      rollback:
+        - dropIndex:
+            indexName: idx_projects_user_id
+            tableName: projects
+        - dropIndex:
+            indexName: idx_tasks_project_id
+            tableName: tasks
