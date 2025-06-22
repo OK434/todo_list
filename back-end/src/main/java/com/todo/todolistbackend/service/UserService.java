@@ -6,6 +6,7 @@ import com.todo.todolistbackend.dto.request.RegisterRequestDto;
 import com.todo.todolistbackend.dto.response.UserResponseDto;
 import com.todo.todolistbackend.entity.User;
 import com.todo.todolistbackend.exceptions.UserAlreadyRegisteredException;
+import com.todo.todolistbackend.exceptions.UserNotFoundException;
 import com.todo.todolistbackend.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -76,6 +77,9 @@ public class UserService {
 
     //Omar habibi this one is just for me, maybe later we'll add a feature that will make the user delete his profile
     public void deleteUser(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException("User not found");
+        }
         userRepository.deleteById(userId);
     }
 }

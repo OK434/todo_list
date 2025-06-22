@@ -160,3 +160,50 @@ databaseChangeLog:
         - dropIndex:
             indexName: idx_tasks_project_id
             tableName: tasks
+
+  - changeSet:
+      id: 1750272132829-7
+      author: ahmed-bader
+      changes:
+        - renameColumn:
+            tableName: projects
+            oldColumnName: name
+            newColumnName: title
+            columnDataType: VARCHAR(255)
+      rollback:
+        - renameColumn:
+            tableName: projects
+            oldColumnName: title
+            newColumnName: name
+            columnDataType: VARCHAR(255)
+
+  - changeSet:
+      id: 1750272132829-8
+      author: ahmed-bader
+      changes:
+        - dropColumn:
+            tableName: tasks
+            columnName: description
+      rollback:
+        - addColumn:
+            tableName: tasks
+            columns:
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+
+  - changeSet:
+      id: 1750612887640-9
+      author: ahmed-bader
+      changes:
+        - renameColumn:
+            tableName: tasks
+            oldColumnName: title
+            newColumnName: description
+            columnDataType: VARCHAR(255)
+      rollback:
+        - renameColumn:
+            tableName: tasks
+            oldColumnName: description
+            newColumnName: title
+            columnDataType: VARCHAR(255)

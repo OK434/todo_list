@@ -1,5 +1,7 @@
 package com.todo.todolistbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,14 +18,16 @@ public class Project {
     @Column(name = "project_id")
     private Long projectId;
 
-    private String name;
+    private String title;
     private String description;
     private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "fk_user_id")
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Task> tasks;
 }

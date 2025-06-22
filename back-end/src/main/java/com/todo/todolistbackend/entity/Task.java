@@ -1,5 +1,6 @@
 package com.todo.todolistbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,11 +14,11 @@ public class Task {
     @Column(name = "task_id")
     private Long taskId;
 
-    private String title;
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "fk_project_id")
+    @JsonIgnore
     private Project project;
 
 }
