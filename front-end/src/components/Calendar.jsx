@@ -22,7 +22,7 @@ export default function Calendar() {
   useEffect(() => {
     if (!user) return;
 
-   fetch(`https://todo-list-1-r6mx.onrender.com/api/tasks?userId=${user._id}`)
+    fetch(`https://todo-list-1-r6mx.onrender.com/api/tasks?userId=${user._id}`)
       .then(res => res.json())
       .then(data => setTasks(data.tasks))
       .catch(err => console.error(err));
@@ -147,9 +147,9 @@ export default function Calendar() {
 
   return (
 
-    <div className="min-h-screen bg-gray-100 p-10">
+    <div className="min-h-screen bg-gray-100 px-6 py-8">
 
-      <div className="max-w-6xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+      <div className="w-full bg-white p-8 rounded-2xl shadow-lg">
 
         <h1 className="text-3xl font-bold mb-6 text-gray-800">
           Calendar
@@ -158,7 +158,8 @@ export default function Calendar() {
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
-          height="auto"
+          height="80vh"
+          contentHeight="auto"
 
           dateClick={(info) => {
             setSelectedDate(info.dateStr);
@@ -311,17 +312,9 @@ export default function Calendar() {
 
               <div className="space-y-5">
 
-                <Input
-                  type="text"
-                  ref={title}
-                  label="Title"
-                />
+                <Input type="text" ref={title} label="Title" />
 
-                <Input
-                  ref={description}
-                  label="Description"
-                  textarea
-                />
+                <Input ref={description} label="Description" textarea />
 
                 <Input
                   type="date"
