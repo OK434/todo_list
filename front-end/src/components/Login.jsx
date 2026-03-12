@@ -23,7 +23,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:1231/api/login", {
+      const response = await fetch(`https://todo-list-1-r6mx.onrender.com/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

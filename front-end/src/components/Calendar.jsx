@@ -22,7 +22,7 @@ export default function Calendar() {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:1231/api/tasks?userId=${user._id}`)
+   fetch(`https://todo-list-1-r6mx.onrender.com/api/tasks?userId=${user._id}`)
       .then(res => res.json())
       .then(data => setTasks(data.tasks))
       .catch(err => console.error(err));
@@ -56,7 +56,7 @@ export default function Calendar() {
 
     try {
 
-      const response = await fetch("http://localhost:1231/api/tasks", {
+      const response = await fetch("https://todo-list-1-r6mx.onrender.com/api/tasks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -94,7 +94,7 @@ export default function Calendar() {
 
     try {
 
-      const response = await fetch(`http://localhost:1231/api/tasks/${id}`, {
+      const response = await fetch(`https://todo-list-1-r6mx.onrender.com/api/tasks/${id}`, {
         method: "DELETE"
       });
 
@@ -116,7 +116,7 @@ export default function Calendar() {
 
     try {
 
-      const response = await fetch(`http://localhost:1231/api/tasks/${id}`, {
+      const response = await fetch(`https://todo-list-1-r6mx.onrender.com/api/tasks/${id}`, {
         method: "PATCH"
       });
 
