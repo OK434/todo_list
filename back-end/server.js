@@ -6,7 +6,8 @@ const app = express();
 require('./routes/db');
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', "https://todo-list-zi28.vercel.app"
+  ],
   credentials: true
 }));
 
