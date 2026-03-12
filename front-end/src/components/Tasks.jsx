@@ -1,3 +1,4 @@
+
 import NewTask from "./NewTask";
 
 export default function Tasks({ tasks, onAdd, onDel }) {
@@ -25,3 +26,4 @@ export default function Tasks({ tasks, onAdd, onDel }) {
     </section>
   );
 }
+

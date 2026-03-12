@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 export default function NewTask({ onAdd }) {
   const [enterTask, setEnterTask] = useState("");
@@ -26,3 +27,4 @@ export default function NewTask({ onAdd }) {
     </div>
   );
 }
+
