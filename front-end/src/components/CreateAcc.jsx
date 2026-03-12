@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import Button from "./Button";
 import Login from "./Login";
 
 export default function CreateAcc() {

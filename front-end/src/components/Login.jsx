@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CreateAcc from "./CreateAcc";
-import Button from "./Button";
+
 import App2 from "./App2";
 
 export default function Login() {
