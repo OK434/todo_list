@@ -34,7 +34,7 @@ export default function CreateAcc() {
     }
 
     try {
-      const response = await fetch(`https://todo-list-1-r6mx.onrender.com/signup`, {
+      const response = await fetch(`https://todo-list-1-r6mx.onrender.com/api/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
