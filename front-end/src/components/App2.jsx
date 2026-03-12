@@ -1,8 +1,5 @@
-
-import SelectPro from "./SelectedPro";
 import { useState } from "react";
 import Calendar from "./Calendar";
-
 export default function App2() {
   const [selectPro, setSelectPro] = useState({
     selectedProjectId: undefined,
