@@ -29,11 +29,21 @@ router.post("/tasks", async (req, res) => {
 
 router.get("/tasks", async (req, res) => {
   try {
-    const tasks = await Task.find().sort({ date: -1 });
+
+    const { userId } = req.query;
+
+    const tasks = await Task.find({ userId }).sort({ date: -1 });
+
     res.json({ tasks });
+
   } catch (error) {
+
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+
+    res.status(500).json({
+      message: "Internal server error"
+    });
+
   }
 });
 
