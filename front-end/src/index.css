@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.fc {
+  width: 100%;
+}
+
+.fc-view-harness {
+  min-height: 650px;
+}
+
+.fc-daygrid-day-frame {
+  min-height: 90px;
+}

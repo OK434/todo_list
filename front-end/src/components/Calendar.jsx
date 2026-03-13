@@ -20,6 +20,7 @@ export default function Calendar() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
+
     if (!user) return;
 
     fetch(`https://todo-list-1-r6mx.onrender.com/api/tasks?userId=${user._id}`)
@@ -147,18 +148,19 @@ export default function Calendar() {
 
   return (
 
-    <div className="min-h-screen bg-gray-100 px-6 py-8">
+    <div className="w-screen min-h-screen bg-gray-200 flex items-center justify-center p-4">
 
-      <div className="w-full bg-white p-8 rounded-2xl shadow-lg">
+      <div className="w-full max-w-[1100px] bg-white p-8 rounded-2xl shadow-xl">
 
-        <h1 className="text-3xl font-bold mb-6 text-gray-800">
+        <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center">
           Calendar
         </h1>
 
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
-          height="80vh"
+            locale="en"
+          height="75vh"
           contentHeight="auto"
 
           dateClick={(info) => {
@@ -220,11 +222,10 @@ export default function Calendar() {
 
                   <li
                     key={task._id}
-                    className={`flex items-center justify-between px-4 py-2 rounded-lg border shadow-sm ${
-                      task.completed
-                        ? "bg-gray-200 border-gray-300"
-                        : "bg-gray-50 border-gray-200"
-                    }`}
+                    className={`flex items-center justify-between px-4 py-2 rounded-lg border shadow-sm ${task.completed
+                      ? "bg-gray-200 border-gray-300"
+                      : "bg-gray-50 border-gray-200"
+                      }`}
                   >
 
                     <span
@@ -302,11 +303,16 @@ export default function Calendar() {
             </p>
           </Modal>
 
-          <div className="fixed top-24 right-10 z-50">
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
 
-            <div className="bg-white w-[26rem] p-7 rounded-2xl shadow-2xl border">
+            <div
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              onClick={() => setAddTaskOpen(false)}
+            />
 
-              <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+            <div className="relative bg-white w-[26rem] max-w-[90%] p-7 rounded-2xl shadow-2xl border">
+
+              <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
                 Create New Task
               </h2>
 
@@ -320,7 +326,7 @@ export default function Calendar() {
                   type="date"
                   ref={date}
                   label="Due Date"
-                  defaultValue={selectedDate}
+                  locale="en"
                 />
 
               </div>
